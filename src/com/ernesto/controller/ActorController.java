@@ -90,7 +90,7 @@ public class ActorController  {
     }  
     
     public List<Actor> getAllActorsByName(String name){
-        Actor actorsList;
+        Actor actorsList;   
         try{ 
             actorsList = null;
             for(Actor actor: this.list){
@@ -115,12 +115,15 @@ public class ActorController  {
         return true;
     }
    
-    public boolean updateActor(Actor updActor){
+    public boolean updateActor(Integer id, String name, Float heigth, String dtBirth){
         boolean flag = false;
+        Actor a = null;
         for(Actor actor: list){
-            if(String.valueOf(actor.getActorId()).equals(String.valueOf(updActor.getActorId()))){
+            if(actor.getActorId().equals(id)){
                 this.list.remove(actor);
-                this.list.add(updActor);
+                a = new Actor(id, name, heigth, dtBirth);
+                this.list.add(a);
+                
                 flag=true;
             }
         }
@@ -164,6 +167,28 @@ public class ActorController  {
         }
         return actorsFound;
     }
+    public boolean findAll(){   
+        boolean success = false;
+        ArrayList<Actor> actorsFound = new ArrayList<Actor>();
+        if(!success){
+            for(Actor actor : this.list){
+                actorsFound.add(actor);
+                success = true;
+            }
+        }
+        return success;
+    }
+    public ArrayList getActors(boolean flag){
+        flag = false;
+        ArrayList<Actor> actorsFound = new ArrayList<Actor>();
+        for(Actor actor : this.list){
+            actorsFound.add(actor);
+            flag = true;
+        }
+        return actorsFound;
+    }
+    
+    
 
     @Override    
     public String toString() {

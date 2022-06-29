@@ -7,6 +7,8 @@ package com.ernesto.views;
 
 import com.ernesto.controller.ActorController;
 import com.ernesto.model.Actor;
+import com.sun.beans.finder.MethodFinder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -126,34 +128,35 @@ public class Program {
                                 }
                         break;
                         case 5: 
-                             List<Actor>  actorsToUpdate = controller.getAllActors();
+                                boolean actorsToUpdate = controller.findAll();
+                                ArrayList<ActorController> atc;
                                 try {    
-                                    if(actorsToUpdate.isEmpty()){
+                                    atc = new ArrayList<>();
+                                    if(actorsToUpdate == false){
                                         System.out.println();
-                                        System.out.println("Dont exist any Actor|\n");
+                                        System.out.println("Dont exist any Actor!\n");
                                     } else{
-                                        System.out.println("\n\nList of all actors:");
-                                            for(Actor a:actorsToUpdate){
-                                                System.out.println( a.toString());
-                                            }
-                                        String idToUpdate = "";
-                                        System.out.println("Insert actorId to update:");
-                                        idToUpdate = scan.nextLine(); 
+                                        System.out.println("\n List of all actors: ");
+                                        for(ActorController a :atc){
+                                            atc = a.getActors(actorsToUpdate);
+                                            System.out.println(atc);
+                                        }
+                                        System.out.println("\n Insert actorId to update: ");
+                                        Integer idToUpdate = scan.nextInt(); 
+                                        scan.nextLine();
                                         //Name
                                         String nameToUpdate = "";
                                         System.out.println("New Name:");
                                         nameToUpdate = scan.nextLine(); 
                                         //heigth
-                                        String heigthToUpdate = ""; 
-                                        System.out.println("Heigt (xx.xx(m)):");
-                                        heigthToUpdate = scan.nextLine(); 
+                                        System.out.println("Heigt (xx.xx(m)): ");
+                                        Float heigthToUpdate = scan.nextFloat();
+                                        scan.nextLine();
                                         //birth
                                         String birthToUpdate = "";
-                                        System.out.println("birth (xx/Dxxxxber/xxxx) :");
+                                        System.out.println("birth (xx/Dxxxxber/xxxx): ");
                                         birthToUpdate = scan.nextLine();
-                                        //Actor(nameToUpdate,Integer.parseInt(idToUpdate), Float.parseFloat(heigthToUpdate), birthToUpdate);
-                                        //actorsToUpdate.add(newActor);
-                                        if(controller.updateActor(new Actor(Integer.parseInt(idToUpdate), nameToUpdate, Float.parseFloat(heigthToUpdate), birthToUpdate))){
+                                        if(controller.updateActor(idToUpdate, nameToUpdate, heigthToUpdate, birthToUpdate)){
                                             System.out.println("Actor updated! ");
                                         }else {
                                             System.out.println("Dont exists actors with this id");
