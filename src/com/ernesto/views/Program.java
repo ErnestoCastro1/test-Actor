@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Aluno
+ * @author Ernest.Castro
  */
 public class Program {
 

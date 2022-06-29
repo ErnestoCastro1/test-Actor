@@ -7,7 +7,7 @@ package com.ernesto.exceptions;
 
 /**
  *
- * @author Aluno
+ * @author Ernesto.Castro
  */
 public class ExceptionActor extends Exception {
     

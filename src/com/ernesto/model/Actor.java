@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Aluno
+ * @author Ernesto.Castro
  */
 public class Actor {
     private Integer actorId;
