@@ -6,16 +6,16 @@
 package com.ernesto.views;
 
 import com.ernesto.controller.ActorController;
-import com.ernesto.model.Actor;
 import com.sun.beans.finder.MethodFinder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+
 /**
  *
- * @author Ernest.Castro
+ * @author Ernesto.Castro
  */
 public class Program {
 
@@ -52,14 +52,13 @@ public class Program {
                 if(opcao > 0 && opcao <=7){
                     switch(opcao){
                         case 1: 
-                            List<Actor> actorList = controller.getAllActors();
-                            if(!actorList.isEmpty()){
+                            //List<Actor> actorList = controller.getAllActors();
+                            boolean actorList = controller.findAll();
+                            if(actorList){
                                 System.out.println();
                                 System.out.println("List of actors:");
                                 System.out.println("<name>,<actorId>,<height>,<date of birth>");
-                                    for(Actor a: actorList){
-                                        System.out.println(a.toString());
-                                    }
+                                controller.getActors(actorList);
                                 System.out.println();
                             } else {
                                 System.out.println("\nDont exists any actor!\n");
@@ -69,9 +68,9 @@ public class Program {
                             String nameFind = "";
                             System.out.print("Name actor: ");
                             nameFind = scan.nextLine();
+                            //List<ActorController> getname = new ArrayList<>();
                                 try{
-                                    List<Actor> getname = controller.getAllActors();
-                                    boolean actorFound = controller.hasActors(getname, nameFind);
+                                    boolean actorFound = controller.findActorByName(nameFind);
                                     if(!(actorFound)){
                                         System.out.println("==========================================");
                                         System.out.println("Actor found");
@@ -90,10 +89,11 @@ public class Program {
                         case 3:
                             String findId = "";
                             System.out.print("Id actor: ");
-                            findId = scan.nextLine();
+                             findId = scan.nextLine();
                                 try{
-                                    List<Actor> getid = controller.getAllActors();
-                                    boolean foundActor = controller.hasActors(getid, Integer.parseInt(findId));
+                                    //List<Actor> getid = controller.getAllActors();
+                                    //boolean foundActor = controller.hasActors(getid, Integer.parseInt(findId));
+                                    boolean foundActor = controller.findActorById(Integer.parseInt(findId));
                                     if(!(foundActor)){
                                         System.out.println("==========================================");
                                         System.out.println("Actor found");

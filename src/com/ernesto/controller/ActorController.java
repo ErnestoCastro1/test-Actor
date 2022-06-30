@@ -29,6 +29,7 @@ public class ActorController  {
     
         //private Map<Integer, Actor> map = new HashMap<>();
     private List<Actor> list;
+    
         
     public ActorController(){
         this.list = new ArrayList<Actor>();
@@ -90,13 +91,13 @@ public class ActorController  {
     }  
     
     public List<Actor> getAllActorsByName(String name){
-        Actor actorsList;   
+        Actor actor;   
         try{ 
-            actorsList = null;
-            for(Actor actor: this.list){
-                if(String.valueOf(name).equals(String.valueOf(actor.getName()))){
-                    actorsList = actor;
-                    System.out.println(actorsList);
+            actor = null;
+            for(Actor act: this.list){
+                if(String.valueOf(name).equals(String.valueOf(act.getName()))){
+                    actor = act;
+                    System.out.println(actor);
                 }
             }
         } catch(Exception e){
@@ -159,7 +160,35 @@ public class ActorController  {
             System.out.println("Error loadtxtfileRepository: " + e.getMessage());
         }
     }
-       
+    
+     
+     public boolean findActorByName(String name) throws ExceptionActor{
+        List<Actor> actorCO = getAllActors();
+        boolean success = hasActors(actorCO, name);
+        if(!success){
+            return false;
+        } else {
+            for(Actor a : list){
+                actorCO.add(a);
+            }
+            return true ;
+        }
+    }
+     
+     public boolean findActorById(Integer id) throws ExceptionActor{
+        List<Actor> actorCO = getAllActors();
+        boolean success = hasActors(actorCO, id);
+        if(!success){
+            //throw new ExceptionActor("Actor dont exists");
+            return false;
+        } else {
+            for(Actor a : list){
+                actorCO.add(a);
+            }
+            return true ;
+        }
+    }
+     
     public List<Actor> getAllActors(){     
         ArrayList<Actor> actorsFound = new ArrayList<Actor>();
         for(Actor actor : this.list){
@@ -167,6 +196,7 @@ public class ActorController  {
         }
         return actorsFound;
     }
+    
     public boolean findAll(){   
         boolean success = false;
         ArrayList<Actor> actorsFound = new ArrayList<Actor>();
@@ -182,11 +212,12 @@ public class ActorController  {
         flag = false;
         ArrayList<Actor> actorsFound = new ArrayList<Actor>();
         for(Actor actor : this.list){
-            actorsFound.add(actor);
+            System.out.println(actor.toString());
             flag = true;
         }
         return actorsFound;
     }
+   
     
     
 
